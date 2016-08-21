@@ -15,9 +15,9 @@ bool InputHandler::init()
     return true;
 }
 
-ProcessEventType InputHandler::processEvent()
+ProcessInputType InputHandler::processEvent()
 {
-    ProcessEventType results = ProcessEventType::NO_EVENT;
+    ProcessInputType results = ProcessInputType::NO_EVENT;
     SDL_Event event;
 
     SDL_PollEvent(&event);
@@ -25,7 +25,7 @@ ProcessEventType InputHandler::processEvent()
     switch (event.type)
     {
     case SDL_QUIT:
-        results = ProcessEventType::CLOSE_EVENT;
+        results = ProcessInputType::CLOSE_EVENT;
         break;
 
     // check for keypresses
@@ -34,19 +34,19 @@ ProcessEventType InputHandler::processEvent()
         switch(event.key.keysym.sym)
         {
         case SDLK_ESCAPE:
-            results = ProcessEventType::CLOSE_EVENT;
+            results = ProcessInputType::CLOSE_EVENT;
             break;
         case SDLK_w:
-            results = ProcessEventType::UP_ARROW_PRESSED;
+            results = ProcessInputType::UP_ARROW_PRESSED;
             break;
         case SDLK_a:
-            results = ProcessEventType::LEFT_ARROW_PRESSED;
+            results = ProcessInputType::LEFT_ARROW_PRESSED;
             break;
         case SDLK_s:
-            results = ProcessEventType::RIGHT_ARROW_PRESSED;
+            results = ProcessInputType::RIGHT_ARROW_PRESSED;
             break;
         case SDLK_d:
-            results = ProcessEventType::DOWN_ARROW_PRESSED;
+            results = ProcessInputType::DOWN_ARROW_PRESSED;
             break;
         default:
             break;
@@ -58,16 +58,16 @@ ProcessEventType InputHandler::processEvent()
         switch(event.key.keysym.sym)
         {
         case SDLK_w:
-            results = ProcessEventType::UP_ARROW_RELEASED;
+            results = ProcessInputType::UP_ARROW_RELEASED;
             break;
         case SDLK_a:
-            results = ProcessEventType::LEFT_ARROW_RELEASED;
+            results = ProcessInputType::LEFT_ARROW_RELEASED;
             break;
         case SDLK_s:
-            results = ProcessEventType::RIGHT_ARROW_RELEASED;
+            results = ProcessInputType::RIGHT_ARROW_RELEASED;
             break;
         case SDLK_d:
-            results = ProcessEventType::DOWN_ARROW_RELEASED;
+            results = ProcessInputType::DOWN_ARROW_RELEASED;
             break;
         default:
             break;

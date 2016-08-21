@@ -34,10 +34,6 @@ int main(int argc, char *argv[])
     {
         bool done = false;
 
-
-        EntityLoader entityLoader(QString("Resources\\EntityConfig.xml"));
-        entityLoader.loadEntities();
-
         if( !mainWindow->init() )
         {
             qDebug() << QString("Failed to initialize main window!" );
@@ -76,7 +72,7 @@ int main(int argc, char *argv[])
         while (!done)
         {
             // message processing loop
-            if(inputHandler->processEvent() == ProcessEventType::CLOSE_EVENT)
+            if(inputHandler->processEvent() == ProcessInputType::CLOSE_EVENT)
             {
                 done = true;
                 break;

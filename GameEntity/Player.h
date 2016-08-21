@@ -7,10 +7,11 @@ class Player : public GameEntity
 {
 public:
     Player(Renderer_Ptr renderer);
-    virtual ~Player();
+    virtual ~Player() {}
 
+    virtual void init();
     virtual void update(){}
-    virtual void render(){}
+    virtual void render();
 
 private:
 

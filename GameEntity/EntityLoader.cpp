@@ -122,7 +122,7 @@ bool EntityLoader::loadEntities()
     }
     if(xmlReader->hasError())
     {
-        success = false;
+        //print out xml error
     }
 
     return success;

@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 
-enum class ProcessEventType
+enum class ProcessInputType
 {
     NO_EVENT = 0,
 
@@ -31,7 +31,7 @@ class InputHandler
 
         bool init();
 
-        ProcessEventType processEvent();
+        ProcessInputType processEvent();
 
 
 };

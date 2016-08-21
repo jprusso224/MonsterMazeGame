@@ -32,7 +32,8 @@ SOURCES += main.cpp \
     InputHandler.cpp \
     GameLayer/HUD.cpp \
     GameLayer/ObjectLayer.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    GameEntity/GameEntityFactory.cpp
 
 HEADERS += \
     GameEntity/GameEntity.h \
@@ -45,7 +46,8 @@ HEADERS += \
     GameLayer/HUD.h \
     GameLayer/ObjectLayer.h \
     MainWindow.h \
-    GameConstants.h
+    GameConstants.h \
+    GameEntity/GameEntityFactory.h
 
 DISTFILES += \
     MazeMap \

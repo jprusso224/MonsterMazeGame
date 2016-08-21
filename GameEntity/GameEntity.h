@@ -3,6 +3,7 @@
 
 #include <GameTypes.h>
 #include <QString>
+#include <QDebug>
 
 class GameEntity
 {
@@ -11,21 +12,33 @@ public:
     GameEntity(Renderer_Ptr renderer);
     virtual ~GameEntity();
 
-  //  virtual void update() = 0;
-  //  virtual void render() = 0;
+    virtual void init() = 0;
+    virtual void update() = 0;
+    virtual void render() = 0;
 
     GamePosition getPosition() const {return m_position;}
     GameVelocity getVelocity() const {return m_velocity;}
 
-    int getHealth() const {return m_health;}
-    int getDamage() const {return m_damage;}
-    int getSpeed() const {return m_speed;}
+    double getHealth() const {return m_health;}
+    double getDamage() const {return m_damage;}
+    double getSpeed() const {return m_speed;}
 
-    void setHealth(int health){m_health = health;}
-    void setDamage(int damage){m_damage = damage;}
-    void setSpeed(int speed ){m_speed = speed;}
+    void setHealth(double health){m_health = health;}
+    void setDamage(double damage){m_damage = damage;}
+    void setSpeed(double speed ){m_speed = speed;}
+    void setImageName(const QString &imgName){m_imgName = imgName;}
+    void setImageSize(int size){m_imgSize = size;}
 
 protected:
+
+    bool loadEntityImage()
+    {
+        QString fullPath = QString("Resources\\" + m_imgName);
+        m_img = IMG_LoadTexture(m_renderer,fullPath.toStdString().c_str());
+        if(m_img == nullptr)
+            return false;
+        return true;
+    }
 
     QString m_name;
 
@@ -35,9 +48,14 @@ protected:
     GamePosition m_position;
     GameVelocity m_velocity;
 
-    int m_health;
-    int m_damage;
-    int m_speed;
+    double m_health;
+    double m_damage;
+    double m_speed;
+
+    QString m_imgName;
+    int m_imgSize;
+
+    SDL_Texture* m_img;
 
 };
 

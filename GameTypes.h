@@ -3,6 +3,7 @@
 
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
+#include <SDL_image.h>
 
 typedef SDL_Renderer* Renderer_Ptr;
 typedef SDL_Surface* Surface_Ptr;

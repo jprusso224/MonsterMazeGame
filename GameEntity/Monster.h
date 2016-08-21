@@ -3,11 +3,15 @@
 
 #include "GameEntity.h"
 
-class Monster : GameEntity
+class Monster : public GameEntity
 {
 public:
     Monster(Renderer_Ptr renderer);
     virtual ~Monster(){}
+
+    virtual void init();
+    virtual void update(){}
+    virtual void render();
 };
 
 #endif // MONSTER_H
