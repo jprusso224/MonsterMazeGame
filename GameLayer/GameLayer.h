@@ -14,6 +14,7 @@ class GameLayer
         virtual ~GameLayer(){}
 
         virtual bool init() = 0;
+        virtual void processInput(ProcessInputType input) = 0;
         virtual void update() = 0;
         virtual void draw() = 0;
 

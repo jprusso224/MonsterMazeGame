@@ -12,6 +12,7 @@ class ObjectLayer : public GameLayer
         virtual ~ObjectLayer();
 
         bool init() override;
+        virtual void processInput(ProcessInputType input);
         void update() override;
         void draw() override;
 

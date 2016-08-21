@@ -1,9 +1,10 @@
 #ifndef GAMEENTITY_H
 #define GAMEENTITY_H
 
-#include <GameTypes.h>
 #include <QString>
 #include <QDebug>
+
+#include "GameTypes.h"
 
 class GameEntity
 {
@@ -13,8 +14,11 @@ public:
     virtual ~GameEntity();
 
     virtual void init() = 0;
+    virtual void processInput(ProcessInputType input) = 0;
     virtual void update() = 0;
     virtual void render() = 0;
+
+    virtual void attack() = 0;
 
     GamePosition getPosition() const {return m_position;}
     GameVelocity getVelocity() const {return m_velocity;}
@@ -31,14 +35,11 @@ public:
 
 protected:
 
-    bool loadEntityImage()
-    {
-        QString fullPath = QString("Resources\\" + m_imgName);
-        m_img = IMG_LoadTexture(m_renderer,fullPath.toStdString().c_str());
-        if(m_img == nullptr)
-            return false;
-        return true;
-    }
+    bool loadEntityImage();
+
+    void updateVelocityComponentsFromDirection();
+    void checkScreenBoundaries();
+    void zeroizeSpeed();
 
     QString m_name;
 

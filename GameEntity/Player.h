@@ -10,8 +10,11 @@ public:
     virtual ~Player() {}
 
     virtual void init();
-    virtual void update(){}
+    virtual void processInput(ProcessInputType input);
+    virtual void update();
     virtual void render();
+
+    virtual void attack();
 
 private:
 

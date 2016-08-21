@@ -39,6 +39,11 @@ bool ObjectLayer::init()
     return success;
 }
 
+void ObjectLayer::processInput(ProcessInputType input)
+{
+    m_player->processInput(input);
+}
+
 void ObjectLayer::update()
 {
     //Handle business logic

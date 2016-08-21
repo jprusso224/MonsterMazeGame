@@ -66,20 +66,33 @@ int main(int argc, char *argv[])
 
         Mix_PlayMusic(music,-1);
 
+        uint32_t startTime = SDL_GetTicks();
+        uint32_t newTime;
+
         /********* THIS IS THE MAIN GAME LOOP ********************/
         qDebug() << QString("Entering main loop! Good luck!");
 
         while (!done)
         {
             // message processing loop
-            if(inputHandler->processEvent() == ProcessInputType::CLOSE_EVENT)
+            ProcessInputType input = inputHandler->processEvent();
+            if(input == ProcessInputType::CLOSE_EVENT)
             {
                 done = true;
                 break;
             }
 
+            mainWindow->processInput(input);
+
             mainWindow->update();
             mainWindow->draw();
+
+            //handle frame rate and cap at 30 fps
+            newTime = SDL_GetTicks();
+            while((newTime - startTime) < 33)
+            {
+                newTime = SDL_GetTicks();
+            }
 
         }
         /*********END MAIN LOOP***********************************/

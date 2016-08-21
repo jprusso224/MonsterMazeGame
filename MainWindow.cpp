@@ -53,9 +53,9 @@ bool MainWindow::init()
     return success;
 }
 
-void MainWindow::processInput()
+void MainWindow::processInput(ProcessInputType input)
 {
-
+    m_objectLayer->processInput(input);
 }
 
 void MainWindow::update()
@@ -68,6 +68,7 @@ void MainWindow::draw()
     m_objectLayer->draw();
 
     SDL_RenderPresent( m_Renderer );
+    SDL_RenderClear( m_Renderer );
 }
 
 void MainWindow::close()

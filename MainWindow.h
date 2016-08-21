@@ -16,7 +16,7 @@ class MainWindow
 
         bool init();
 
-        void processInput();
+        void processInput(ProcessInputType input);
 
         void update();
 

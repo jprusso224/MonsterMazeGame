@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include "InputHandler.h"
 
 InputHandler::InputHandler()
@@ -37,16 +39,20 @@ ProcessInputType InputHandler::processEvent()
             results = ProcessInputType::CLOSE_EVENT;
             break;
         case SDLK_w:
+            qDebug() << "W pressed!";
             results = ProcessInputType::UP_ARROW_PRESSED;
             break;
         case SDLK_a:
             results = ProcessInputType::LEFT_ARROW_PRESSED;
             break;
         case SDLK_s:
-            results = ProcessInputType::RIGHT_ARROW_PRESSED;
+            results = ProcessInputType::DOWN_ARROW_PRESSED;
             break;
         case SDLK_d:
-            results = ProcessInputType::DOWN_ARROW_PRESSED;
+            results = ProcessInputType::RIGHT_ARROW_PRESSED;
+            break;
+        case SDLK_SPACE:
+            results = ProcessInputType::A_BUTTON_PRESSED;
             break;
         default:
             break;
@@ -64,10 +70,10 @@ ProcessInputType InputHandler::processEvent()
             results = ProcessInputType::LEFT_ARROW_RELEASED;
             break;
         case SDLK_s:
-            results = ProcessInputType::RIGHT_ARROW_RELEASED;
+            results = ProcessInputType::DOWN_ARROW_RELEASED;
             break;
         case SDLK_d:
-            results = ProcessInputType::DOWN_ARROW_RELEASED;
+            results = ProcessInputType::RIGHT_ARROW_RELEASED;
             break;
         default:
             break;
