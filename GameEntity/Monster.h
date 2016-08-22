@@ -23,8 +23,8 @@ public:
     virtual ~Monster(){}
 
     virtual void init();
-    virtual void processInput(ProcessInputType input){} /*Monsters don't care about input*/
-    virtual void update();
+    virtual void processInput(ProcessInputType input){Q_UNUSED(input)} /*Monsters don't care about input*/
+    virtual void update(uint32_t currTime_ms);
     virtual void render();
 
     virtual void attack();

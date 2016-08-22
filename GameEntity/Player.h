@@ -11,7 +11,7 @@ public:
 
     virtual void init();
     virtual void processInput(ProcessInputType input);
-    virtual void update();
+    virtual void update(uint32_t currTime_ms);
     virtual void render();
 
     virtual void attack();

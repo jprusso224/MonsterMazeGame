@@ -31,9 +31,8 @@ void Monster::init()
 
 }
 
-void Monster::update()
+void Monster::update(uint32_t currTime_ms)
 {
-    uint32_t currTime_ms = SDL_GetTicks();
 
     if((currTime_ms - lastEventTime_ms) > MONSTER_MOVE_DELAY)
     {

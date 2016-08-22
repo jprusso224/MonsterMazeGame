@@ -44,14 +44,15 @@ void ObjectLayer::processInput(ProcessInputType input)
     m_player->processInput(input);
 }
 
-void ObjectLayer::update()
+void ObjectLayer::update(uint32_t currTime_ms)
 {
-    //Handle business logic
-    m_player->update();
+
     for(Monster* monster : m_monsterMap)
     {
-        monster->update();
+        monster->update(currTime_ms);
     }
+
+    m_player->update(currTime_ms);
 
 }
 

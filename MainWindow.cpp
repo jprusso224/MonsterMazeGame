@@ -58,9 +58,9 @@ void MainWindow::processInput(ProcessInputType input)
     m_objectLayer->processInput(input);
 }
 
-void MainWindow::update()
+void MainWindow::update(uint32_t currTime_ms)
 {
-    m_objectLayer->update();
+    m_objectLayer->update(currTime_ms);
 }
 
 void MainWindow::draw()

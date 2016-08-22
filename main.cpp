@@ -74,6 +74,13 @@ int main(int argc, char *argv[])
 
         while (!done)
         {
+            //handle frame rate and cap at 30 fps
+            newTime = SDL_GetTicks();
+            while((newTime - startTime) < 33)
+            {
+                newTime = SDL_GetTicks();
+            }
+
             // message processing loop
             ProcessInputType input = inputHandler->processEvent();
             if(input == ProcessInputType::CLOSE_EVENT)
@@ -84,15 +91,9 @@ int main(int argc, char *argv[])
 
             mainWindow->processInput(input);
 
-            mainWindow->update();
+            mainWindow->update(newTime);
             mainWindow->draw();
 
-            //handle frame rate and cap at 30 fps
-            newTime = SDL_GetTicks();
-            while((newTime - startTime) < 33)
-            {
-                newTime = SDL_GetTicks();
-            }
 
         }
         /*********END MAIN LOOP***********************************/

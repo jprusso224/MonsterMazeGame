@@ -18,7 +18,7 @@ class MainWindow
 
         void processInput(ProcessInputType input);
 
-        void update();
+        void update(uint32_t currTime_ms);
 
         void draw();
 

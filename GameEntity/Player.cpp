@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Projectile.h"
 
 Player::Player(Renderer_Ptr renderer)
     : GameEntity(renderer)
@@ -64,8 +65,10 @@ void Player::processInput(ProcessInputType input)
     }
 }
 
-void Player::update()
+void Player::update(uint32_t currTime_ms)
 {
+    Q_UNUSED(currTime_ms)
+
     m_position.x += m_velocity.dx;
     m_position.y += m_velocity.dy;
 
@@ -82,4 +85,7 @@ void Player::render()
 void Player::attack()
 {
     qDebug() << "Player attacked with " << QString::number(m_damage) << " damage!";
+
+    Projectile * projectile = new Projectile(m_renderer,m_position,m_velocity);
+
 }

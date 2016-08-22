@@ -27,8 +27,8 @@ struct GameVelocity
 {
     GameVelocity() : direction(GameDirection::LEFT),dx(0),dy(0) {}
     GameDirection direction;
-    int dx;
-    int dy;
+    double dx;
+    double dy;
 };
 
 struct GameMapSize
