@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "Projectile.h"
 
 Player::Player(Renderer_Ptr renderer)
     : GameEntity(renderer)
@@ -8,7 +7,7 @@ Player::Player(Renderer_Ptr renderer)
 
 void Player::init()
 {
-    if(loadEntityImage())
+    if(loadObjectImage())
     {
         qDebug() << "loaded player image!";
     }
@@ -69,10 +68,32 @@ void Player::update(uint32_t currTime_ms)
 {
     Q_UNUSED(currTime_ms)
 
+    QList<uint16_t> removalList;
+
     m_position.x += m_velocity.dx;
     m_position.y += m_velocity.dy;
 
     checkScreenBoundaries();
+
+    for(Projectile* p : projectileList)
+    {
+        if(p != nullptr)
+        {
+            p->update(currTime_ms);
+
+            if(p->isOffScreen())
+            {
+                removalList.append(projectileList.indexOf(p));
+            }
+        }
+    }
+
+    for(uint16_t idx : removalList)
+    {
+        Projectile* pOffScreen = projectileList.at(idx);
+        projectileList.removeAt(idx);
+        delete pOffScreen;
+    }
 }
 
 void Player::render()
@@ -80,12 +101,19 @@ void Player::render()
     SDL_Rect rDest = {m_position.x,m_position.y,0,0};
     SDL_QueryTexture(m_img, NULL, NULL, &rDest.w, &rDest.h);
     SDL_RenderCopy(m_renderer, m_img, NULL, &rDest);
+
+    for(Projectile* p : projectileList)
+    {
+        if(p != nullptr)
+            p->render();
+    }
 }
 
 void Player::attack()
 {
     qDebug() << "Player attacked with " << QString::number(m_damage) << " damage!";
 
-    Projectile * projectile = new Projectile(m_renderer,m_position,m_velocity);
-
+    Projectile *p = new Projectile(m_renderer,m_position,m_velocity);
+    p->init();
+    projectileList.append(p);
 }

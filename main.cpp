@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
         music = Mix_LoadMUS( "Resources\\Db_Phrigian.wav" );
         if( music == NULL )
         {
-            qDebug() << QString( "Failed to load beat music! SDL_mixer Error: %0").arg(Mix_GetError());
+            qDebug() << QString( "Failed to load music! SDL_mixer Error: %0").arg(Mix_GetError());
         }
 
         Mix_PlayMusic(music,-1);
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
             }
 
             // message processing loop
-            ProcessInputType input = inputHandler->processEvent();
+            ProcessInputType input = inputHandler->processInput();
             if(input == ProcessInputType::CLOSE_EVENT)
             {
                 done = true;

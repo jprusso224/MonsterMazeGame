@@ -12,6 +12,7 @@ public:
     virtual void update(uint32_t currTime_ms);
     virtual void render();
 
+
 };
 
 #endif // PROJECTILE_H

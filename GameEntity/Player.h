@@ -1,7 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <QList>
+
 #include "GameEntity.h"
+#include "Projectile.h"
 
 class Player : public GameEntity
 {
@@ -17,6 +20,8 @@ public:
     virtual void attack();
 
 private:
+
+    QList<Projectile*> projectileList;
 
 };
 

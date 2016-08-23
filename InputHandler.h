@@ -14,7 +14,7 @@ class InputHandler
 
         bool init();
 
-        ProcessInputType processEvent();
+        ProcessInputType processInput();
 
 };
 

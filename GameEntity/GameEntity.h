@@ -28,17 +28,10 @@ public:
 
 protected:
 
-    bool loadEntityImage();
-
     QString m_name;
 
     double m_health;
     double m_damage;
-
-    QString m_imgName;
-    int m_imgSize;
-
-    SDL_Texture* m_img;
 
 };
 

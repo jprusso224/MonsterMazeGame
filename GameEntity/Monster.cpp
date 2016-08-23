@@ -12,7 +12,7 @@ Monster::Monster(Renderer_Ptr renderer)
 
 void Monster::init()
 {
-    if(loadEntityImage())
+    if(loadObjectImage())
     {
         qDebug() << "loaded monster image!";
     }

@@ -17,7 +17,7 @@ bool InputHandler::init()
     return true;
 }
 
-ProcessInputType InputHandler::processEvent()
+ProcessInputType InputHandler::processInput()
 {
     ProcessInputType results = ProcessInputType::NO_EVENT;
     SDL_Event event;

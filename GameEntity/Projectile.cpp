@@ -1,5 +1,6 @@
+#include <QDebug>
+
 #include "Projectile.h"
-#include <SDL2_gfxPrimitives.h>
 
 Projectile::Projectile(Renderer_Ptr renderer, GamePosition pos, GameVelocity vel)
     : GameObject(renderer)
@@ -10,7 +11,16 @@ Projectile::Projectile(Renderer_Ptr renderer, GamePosition pos, GameVelocity vel
 
 void Projectile::init()
 {
-    m_size = 5; //lets call it radius
+
+    m_imgName = QString("Projectile.png");
+    m_imgSize = 8; //px
+
+    m_speed = 7;
+
+    if(loadObjectImage())
+    {
+        qDebug() << "loaded projectile image!";
+    }
 }
 
 void Projectile::update(uint32_t currTime_ms)
@@ -23,6 +33,11 @@ void Projectile::update(uint32_t currTime_ms)
 
 void Projectile::render()
 {
+   // TODO: Use SDL gfx primitives
    // filledCircleRGBA(m_renderer,m_position.x,m_position.y,m_size,0,255,255,255);
+
+    SDL_Rect rDest = {m_position.x,m_position.y,0,0};
+    SDL_QueryTexture(m_img, NULL, NULL, &rDest.w, &rDest.h);
+    SDL_RenderCopy(m_renderer, m_img, NULL, &rDest);
 }
 
