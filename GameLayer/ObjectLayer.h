@@ -19,6 +19,9 @@ class ObjectLayer : public GameLayer
     protected:
 
     private:
+
+        void checkProjectileHits();
+
         Player* m_player;
         QMap<int, Monster*> m_monsterMap;
 

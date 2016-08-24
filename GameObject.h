@@ -23,6 +23,8 @@ public:
     double getSpeed() const {return m_speed;}
     void setSpeed(double speed ){m_speed = speed;}
 
+    int getSize() const {return m_size;}
+
     bool isOffScreen();
 
 protected:

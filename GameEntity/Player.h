@@ -19,6 +19,13 @@ public:
 
     virtual void attack();
 
+    /*
+     * Need to return by reference so the object layer can remove them
+     * upon collision. Don't forget to delete!
+     */
+    QList<Projectile*> getProjectiles(){return projectileList;}
+    void removeProjectiles(QList<int> projectileIdxToRemove);
+
 private:
 
     QList<Projectile*> projectileList;

@@ -38,6 +38,13 @@ struct GameMapSize
     int width;
 };
 
+struct GameSize
+{
+    GameSize() : h(0), w(0) {}
+    int h;
+    int w;
+};
+
 enum class ProcessInputType
 {
     NO_EVENT = 0,

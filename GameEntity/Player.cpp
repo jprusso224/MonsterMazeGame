@@ -117,3 +117,17 @@ void Player::attack()
     p->init();
     projectileList.append(p);
 }
+
+void Player::removeProjectiles(QList<int> projectileIdxToRemove)
+{
+    qDebug() << "Removing!!!";
+    for(int idx : projectileIdxToRemove)
+    {
+        qDebug() << "int loop!!!" << idx;
+        Projectile* pRemove = projectileList.at(idx);
+        qDebug() << "got pointer!!!" << idx;
+        projectileList.removeAt(idx);
+        qDebug() << "deletingw!!!" << idx;
+
+    }
+}
