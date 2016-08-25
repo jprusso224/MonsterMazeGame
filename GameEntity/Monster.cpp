@@ -27,7 +27,10 @@ void Monster::init()
     m_position.x = distX(rngX);
     m_position.y = distY(rngY);
 
+    //Initialize timers
     lastEventTime_ms = SDL_GetTicks();
+    int gracePeriod_ms = 1000;
+    lastFireTime_ms = lastFireTime_ms - gracePeriod_ms;
 
 }
 
@@ -40,11 +43,18 @@ void Monster::update(uint32_t currTime_ms)
         lastEventTime_ms = currTime_ms;
     }
 
+    if((currTime_ms - lastFireTime_ms) > (m_fireRate*1000))
+    {
+        attack();
+        lastFireTime_ms = currTime_ms;
+    }
+
     m_position.x += m_velocity.dx;
     m_position.y += m_velocity.dy;
 
     checkScreenBoundaries();
 
+    updateProjectiles(currTime_ms);
 }
 
 void Monster::render()
@@ -52,11 +62,21 @@ void Monster::render()
     SDL_Rect rDest = {m_position.x,m_position.y,0,0};
     SDL_QueryTexture(m_img, NULL, NULL, &rDest.w, &rDest.h);
     SDL_RenderCopy(m_renderer, m_img, NULL, &rDest);
+
+    for(Projectile* p : projectileList)
+    {
+        if(p != nullptr)
+            p->render();
+    }
 }
 
 void Monster::attack()
 {
-    qDebug() << "Player attacked with " << QString::number(m_damage) << " damage!";
+    qDebug() << "Monster attacked with " << QString::number(m_damage) << " damage!";
+
+    Projectile *p = new Projectile(m_renderer,m_position,m_velocity);
+    p->init();
+    projectileList.append(p);
 }
 
 void Monster::handleEventTimeout()

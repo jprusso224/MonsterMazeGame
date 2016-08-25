@@ -16,7 +16,7 @@
                 <speed val="4"/> <!-- 1-5 -->
                 <damage val="10"/> <!-- HP -->
                 <damage-fx val="drain"/>
-                <fire-rate val="1"/> <!--Hz-->
+                <fire-rate val="2"/> <!--Hz-->
                 <attack-range val="200"/> <!--px-->
                 <special val="heal"/>
 	</entity>
@@ -40,7 +40,7 @@
                 <speed val="5"/>
                 <damage val="25"/> <!-- HP -->
                 <damage-fx val="poison"/>
-                <fire-rate val="3"/> <!--Hz-->
+                <fire-rate val="1"/> <!--Hz-->
                 <attack-range val="100"/> <!--px-->
                 <special val="cloak"/>
 	</entity>

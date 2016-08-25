@@ -29,10 +29,16 @@ public:
 
     virtual void attack();
 
+    int getFireRate() const {return m_fireRate;}
+    void setFireRate(int fireRate){m_fireRate = fireRate;}
+
 private:
+
+    int m_fireRate;
 
     void handleEventTimeout();
     uint32_t lastEventTime_ms;
+    uint32_t lastFireTime_ms;
 
 };
 

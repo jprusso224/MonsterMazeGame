@@ -53,6 +53,8 @@ void GameEntityFactory::createNewMonster(EntityData* data)
     Monster* monster = new Monster(m_Renderer);
     setCommonEntityData(monster, data);
 
+    monster->setFireRate(data->firerate);
+
     //insert monster and increment unique monster ID
     m_monsterMap.insert(m_monster_UID, monster);
     m_monster_UID++;

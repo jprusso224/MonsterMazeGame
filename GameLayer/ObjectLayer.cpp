@@ -79,6 +79,7 @@ void ObjectLayer::checkProjectileHits()
     //the projectile and decrement the monsters health.
     //TODO: Animate the monster being hit by blitting the texture.
 
+    //START PLAYER PROJECTILE TO MONSTER COLLISIONS
     QList<Projectile*> playerProjectiles = m_player->getProjectiles();
     QList<int> removeIdxList;
     for(Projectile* p : playerProjectiles)
@@ -105,6 +106,7 @@ void ObjectLayer::checkProjectileHits()
             {
                 //hit!!!!!
                 qDebug() << "Monster Hit!!!";
+                m->processHit(m_player->getDamage());
                 removeIdxList.append(playerProjectiles.indexOf(p));
                 break;//one monster hit per projectile.
 
@@ -117,4 +119,46 @@ void ObjectLayer::checkProjectileHits()
     {
         m_player->removeProjectiles(removeIdxList);
     }
+    //END PLAYER PROJECTILE TO MONSTER COLLISIONS
+
+    //START MONSTER PROJECTILE TO PLAYER COLLISIONS
+    for(Monster* m : m_monsterMap)
+    {
+        QList<Projectile*> monsterProjectiles = m->getProjectiles();
+        QList<int> removeIdxList;
+        for(Projectile* p : monsterProjectiles)
+        {
+            //Will do calculations here now but move later
+            //Assume projectile is particle and offset position
+            //to center. pOrig is top left corner.
+            int pSize = p->getSize();
+            GamePosition pOrig = p->getPosition();
+
+            GamePosition pCenteredPos;
+            pCenteredPos.x = pOrig.x + (pSize/2);
+            pCenteredPos.y = pOrig.y + (pSize/2);
+
+            GamePosition mPos = m_player->getPosition();
+            GameSize hitbox;
+            hitbox.h = m->getSize();
+            hitbox.w = m->getSize();
+
+            //if is in hitbox
+            if((pCenteredPos.x > mPos.x && pCenteredPos.x < (mPos.x + hitbox.w)) && (pCenteredPos.y > mPos.y && pCenteredPos.y < (mPos.y + hitbox.w)))
+            {
+                //hit!!!!!
+                qDebug() << "Player Hit!!!";
+                m_player->processHit(m->getDamage());
+                removeIdxList.append(monsterProjectiles.indexOf(p));
+
+            }
+        }
+
+        //Remove the projectiles that were hits!
+        if(!removeIdxList.isEmpty())
+        {
+            m->removeProjectiles(removeIdxList);
+        }
+    }
+    //END MONSTER PROJECTILE TO PLAYER COLLISIONS
 }

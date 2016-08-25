@@ -13,6 +13,8 @@ static const QString ENTITY_HEALTH = QString("health");
 static const QString ENTITY_SPEED = QString("speed");
 static const QString ENTITY_DAMAGE = QString("damage");
 
+static const QString ENTITY_FIRE_RATE = QString("fire-rate");
+
 EntityLoader::EntityLoader(const QString &fileName)
 {
     entityFile = new QFile(fileName);
@@ -111,6 +113,11 @@ bool EntityLoader::loadEntities()
             {
                 qDebug()  << ENTITY_DAMAGE << ": " << xmlReader->attributes().front().value().toString();
                 workingEntity->damage = xmlReader->attributes().front().value().toDouble();
+            }
+            else if(xmlReader->name().compare(ENTITY_FIRE_RATE) == 0)
+            {
+                qDebug()  << ENTITY_FIRE_RATE << ": " << xmlReader->attributes().front().value().toString();
+                workingEntity->firerate = (int)xmlReader->attributes().front().value().toDouble();
             }
             else
             {

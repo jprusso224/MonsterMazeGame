@@ -6,6 +6,7 @@
 
 #include "GameTypes.h"
 #include "GameObject.h"
+#include "Projectile.h"
 
 class GameEntity : public GameObject
 {
@@ -26,12 +27,26 @@ public:
     void setImageName(const QString &imgName){m_imgName = imgName;}
     void setImageSize(int size){m_imgSize = size;}
 
+    /*
+     * Need to return by reference so the object layer can remove them
+     * upon collision. Don't forget to delete!
+     */
+    QList<Projectile*> getProjectiles(){return projectileList;}
+    void removeProjectiles(QList<int> projectileIdxToRemove);
+
+    void processHit(int damage);
+
+
 protected:
+
+    void updateProjectiles(uint32_t currTime_ms);
 
     QString m_name;
 
     double m_health;
     double m_damage;
+
+    QList<Projectile*> projectileList;
 
 };
 

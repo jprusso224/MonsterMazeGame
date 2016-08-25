@@ -28,6 +28,7 @@ struct EntityData
     double damage;
 
     //OPTIONAL FIELDS
+    int firerate;
 
     //TBD.
 

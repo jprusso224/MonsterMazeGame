@@ -66,34 +66,14 @@ void Player::processInput(ProcessInputType input)
 
 void Player::update(uint32_t currTime_ms)
 {
-    Q_UNUSED(currTime_ms)
-
-    QList<uint16_t> removalList;
 
     m_position.x += m_velocity.dx;
     m_position.y += m_velocity.dy;
 
     checkScreenBoundaries();
 
-    for(Projectile* p : projectileList)
-    {
-        if(p != nullptr)
-        {
-            p->update(currTime_ms);
+    updateProjectiles(currTime_ms);
 
-            if(p->isOffScreen())
-            {
-                removalList.append(projectileList.indexOf(p));
-            }
-        }
-    }
-
-    for(uint16_t idx : removalList)
-    {
-        Projectile* pOffScreen = projectileList.at(idx);
-        projectileList.removeAt(idx);
-        delete pOffScreen;
-    }
 }
 
 void Player::render()
@@ -110,24 +90,11 @@ void Player::render()
 }
 
 void Player::attack()
-{
-    qDebug() << "Player attacked with " << QString::number(m_damage) << " damage!";
+{    qDebug() << "Player attacked with " << QString::number(m_damage) << " damage!";
 
-    Projectile *p = new Projectile(m_renderer,m_position,m_velocity);
-    p->init();
-    projectileList.append(p);
+     Projectile *p = new Projectile(m_renderer,m_position,m_velocity);
+     p->init();
+     projectileList.append(p);
+
 }
 
-void Player::removeProjectiles(QList<int> projectileIdxToRemove)
-{
-    qDebug() << "Removing!!!";
-    for(int idx : projectileIdxToRemove)
-    {
-        qDebug() << "int loop!!!" << idx;
-        Projectile* pRemove = projectileList.at(idx);
-        qDebug() << "got pointer!!!" << idx;
-        projectileList.removeAt(idx);
-        qDebug() << "deletingw!!!" << idx;
-
-    }
-}
