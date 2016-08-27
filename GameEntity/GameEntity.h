@@ -46,6 +46,11 @@ protected:
     double m_health;
     double m_damage;
 
+    /*
+     * TODO: Consider making this an object pool since the projectiles will be
+     * allocated and de-allocated very often. Could be a fixed list of
+     * 100 or so projectile objects.
+     */
     QList<Projectile*> projectileList;
 
 };

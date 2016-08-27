@@ -4,6 +4,7 @@
 #include <QTimer>
 
 #include "GameEntity.h"
+#include "Player.h"
 
 enum RandomMonsterEvent : int
 {
@@ -24,10 +25,12 @@ public:
 
     virtual void init();
     virtual void processInput(ProcessInputType input){Q_UNUSED(input)} /*Monsters don't care about input*/
-    virtual void update(uint32_t currTime_ms);
+    virtual void update(uint32_t currTime_ms  ) override;
     virtual void render();
 
     virtual void attack();
+
+    void setPlayer(const Player* player){m_player = player;}
 
     int getFireRate() const {return m_fireRate;}
     void setFireRate(int fireRate){m_fireRate = fireRate;}
@@ -39,6 +42,9 @@ private:
     void handleEventTimeout();
     uint32_t lastEventTime_ms;
     uint32_t lastFireTime_ms;
+
+    /*Must have const reference to player, can never change player*/
+    const Player* m_player;
 
 };
 

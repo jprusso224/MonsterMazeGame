@@ -19,9 +19,28 @@ enum class GameDirection
 struct GamePosition
 {
     GamePosition() : x(0),y(0) {}
+
+    const GamePosition operator+(const GamePosition other) const
+    {
+        GamePosition result = *(this);
+        result.x += other.x;
+        result.y += other.y;
+        return result;
+    }
+
+    const GamePosition operator-(const GamePosition other) const
+    {
+        GamePosition result = *(this);
+        result.x -= other.x;
+        result.y -= other.y;
+        return result;
+    }
+
     int x;
     int y;
 };
+
+
 
 struct GameVelocity
 {

@@ -11,6 +11,7 @@ void Player::init()
     {
         qDebug() << "loaded player image!";
     }
+    m_orientation = GameDirection::DOWN;
 }
 
 void Player::processInput(ProcessInputType input)
@@ -21,18 +22,22 @@ void Player::processInput(ProcessInputType input)
     /****START ARROW PRESSED INPUT******************/
     case ProcessInputType::DOWN_ARROW_PRESSED:
         m_velocity.direction = GameDirection::DOWN;
+        m_orientation = GameDirection::DOWN;
         updateVelocityComponentsFromDirection();
     break;
     case ProcessInputType::UP_ARROW_PRESSED:
         m_velocity.direction = GameDirection::UP;
+        m_orientation = GameDirection::UP;
         updateVelocityComponentsFromDirection();
     break;
     case ProcessInputType::LEFT_ARROW_PRESSED:
         m_velocity.direction = GameDirection::LEFT;
+        m_orientation = GameDirection::LEFT;
         updateVelocityComponentsFromDirection();
     break;
     case ProcessInputType::RIGHT_ARROW_PRESSED:
         m_velocity.direction = GameDirection::RIGHT;
+        m_orientation = GameDirection::RIGHT;
         updateVelocityComponentsFromDirection();
     break;
     /****END ARROW PRESSED INPUT*********************/
@@ -92,7 +97,11 @@ void Player::render()
 void Player::attack()
 {    qDebug() << "Player attacked with " << QString::number(m_damage) << " damage!";
 
-     Projectile *p = new Projectile(m_renderer,m_position,m_velocity);
+     //Determine player velocity;
+     GameVelocity projectileVector;
+     projectileVector.direction = m_orientation;
+
+     Projectile *p = new Projectile(m_renderer,m_position,projectileVector);
      p->init();
      projectileList.append(p);
 

@@ -25,12 +25,17 @@ void Projectile::init()
 
 void Projectile::update(uint32_t currTime_ms)
 {
+    Q_UNUSED(currTime_ms);
+
     if(m_velocity.direction > GameDirection::UP)
     {
         m_velocity.direction = GameDirection::UP;
     }
 
-    updateVelocityComponentsFromDirection();
+    if(m_velocity.dx == 0 && m_velocity.dy == 0)
+    {
+        updateVelocityComponentsFromDirection();
+    }
 
     m_position.x += m_velocity.dx;
     m_position.y += m_velocity.dy;

@@ -45,15 +45,12 @@ void GameEntity::updateProjectiles(uint32_t currTime_ms)
 
 void GameEntity::removeProjectiles(QList<int> projectileIdxToRemove)
 {
-    qDebug() << "Removing!!!";
+    //Remove AND delete projectiles when they are no longer in use.
     for(int idx : projectileIdxToRemove)
     {
-        qDebug() << "int loop!!!" << idx;
         Projectile* pRemove = projectileList.at(idx);
-        qDebug() << "got pointer!!!" << idx;
         projectileList.removeAt(idx);
-        qDebug() << "deletingw!!!" << idx;
-
+        delete pRemove;
     }
 }
 

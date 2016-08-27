@@ -16,6 +16,7 @@ public:
 
     GamePosition getPosition() const {return m_position;}
     GameVelocity getVelocity() const {return m_velocity;}
+    GameDirection getOrientation() const {return m_orientation;}
 
     // TODO: Make this nominal speed or maximum speed.
     // Otherwise its duplicating velocity info.
@@ -36,6 +37,7 @@ protected:
 
     GamePosition m_position;
     GameVelocity m_velocity;
+    GameDirection m_orientation;
 
     double m_speed;
     int m_size;

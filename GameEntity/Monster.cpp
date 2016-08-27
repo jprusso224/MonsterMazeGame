@@ -1,4 +1,5 @@
 #include <random>
+#include <math.h>
 
 #include "Monster.h"
 #include "GameConstants.h"
@@ -74,7 +75,24 @@ void Monster::attack()
 {
     qDebug() << "Monster attacked with " << QString::number(m_damage) << " damage!";
 
-    Projectile *p = new Projectile(m_renderer,m_position,m_velocity);
+    /*
+     * Calculations to target player and fire a projectile at the player.
+     *
+     * TODO: These need work. Likely just integer precision decreasing
+     * accuracy.
+     */
+
+    GamePosition playerPos;
+    playerPos.x = m_player->getPosition().x + (m_player->getSize()/2);
+    playerPos.y = m_player->getPosition().y + (m_player->getSize()/2);
+    GamePosition unscaledTargetVector = playerPos - m_position;
+
+    double norm = hypot((double)unscaledTargetVector.x,(double)unscaledTargetVector.y);
+    GameVelocity targetVector;
+    targetVector.dx = ((double)unscaledTargetVector.x / norm)*7.0;
+    targetVector.dy = ((double)unscaledTargetVector.y / norm)*7.0;
+
+    Projectile *p = new Projectile(m_renderer,m_position,targetVector);
     p->init();
     projectileList.append(p);
 }

@@ -7,7 +7,6 @@
 ObjectLayer::ObjectLayer(Renderer_Ptr renderer)
 {
     m_Renderer = renderer;
-    //m_player = new Player(renderer,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
 }
 
 ObjectLayer::~ObjectLayer()
@@ -51,6 +50,12 @@ void ObjectLayer::update(uint32_t currTime_ms)
 
     for(Monster* monster : m_monsterMap)
     {
+        /*
+         * Pass each monster a const reference to the player.
+         * This is necessary so the monsters can attack the player.
+         */
+        monster->setPlayer(m_player);
+
         monster->update(currTime_ms);
     }
 
