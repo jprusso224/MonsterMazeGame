@@ -23,9 +23,9 @@ void Projectile::init()
     }
 }
 
-void Projectile::update(uint32_t currTime_ms)
+void Projectile::update(uint32_t elapsedTime_ms)
 {
-    Q_UNUSED(currTime_ms);
+    Q_UNUSED(elapsedTime_ms);
 
     if(m_velocity.direction > GameDirection::UP)
     {

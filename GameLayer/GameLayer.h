@@ -15,7 +15,7 @@ class GameLayer
 
         virtual bool init() = 0;
         virtual void processInput(ProcessInputType input) = 0;
-        virtual void update(uint32_t currTime_ms) = 0;
+        virtual void update(uint32_t elapsedTime_ms) = 0;
         virtual void draw() = 0;
 
     protected:

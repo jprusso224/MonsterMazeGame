@@ -4,11 +4,21 @@
 #include "Monster.h"
 #include "GameConstants.h"
 
-static const uint32_t MONSTER_MOVE_DELAY = 500;
+static const Uint32 MONSTER_MOVE_DELAY = 500;
+static const Uint32 MONSTER_ATTACK_GRACE_DELAY = 1000;
 
 Monster::Monster(Renderer_Ptr renderer)
-    : GameEntity(renderer)
+    : GameEntity(renderer),
+      m_movementTimer(new GameEventTimer),
+      m_attackTimer(new GameEventTimer)
+
 {
+}
+
+Monster::~Monster()
+{
+    delete m_movementTimer;
+    delete m_attackTimer;
 }
 
 void Monster::init()
@@ -28,26 +38,25 @@ void Monster::init()
     m_position.x = distX(rngX);
     m_position.y = distY(rngY);
 
-    //Initialize timers
-    lastEventTime_ms = SDL_GetTicks();
-    int gracePeriod_ms = 1000;
-    lastFireTime_ms = lastFireTime_ms - gracePeriod_ms;
+    m_attackTimer->start(MONSTER_ATTACK_GRACE_DELAY);
+    m_movementTimer->start(MONSTER_MOVE_DELAY);
 
 }
 
-void Monster::update(uint32_t currTime_ms)
+void Monster::update(uint32_t elapsedTime_ms)
 {
 
-    if((currTime_ms - lastEventTime_ms) > MONSTER_MOVE_DELAY)
+    m_movementTimer->update(elapsedTime_ms);
+    if(m_movementTimer->isExpired())
     {
-        handleEventTimeout();
-        lastEventTime_ms = currTime_ms;
+       handleEventTimeout();
+       m_movementTimer->start(MONSTER_MOVE_DELAY);
     }
 
-    if((currTime_ms - lastFireTime_ms) > (m_fireRate*1000))
+    m_attackTimer->update(elapsedTime_ms);
+    if(m_attackTimer->isExpired())
     {
         attack();
-        lastFireTime_ms = currTime_ms;
     }
 
     m_position.x += m_velocity.dx;
@@ -55,7 +64,7 @@ void Monster::update(uint32_t currTime_ms)
 
     checkScreenBoundaries();
 
-    updateProjectiles(currTime_ms);
+    updateProjectiles(elapsedTime_ms);
 }
 
 void Monster::render()
@@ -95,6 +104,9 @@ void Monster::attack()
     Projectile *p = new Projectile(m_renderer,m_position,targetVector);
     p->init();
     projectileList.append(p);
+
+    /*restart attack timer*/
+    m_attackTimer->start(m_fireRate*1000);
 }
 
 void Monster::handleEventTimeout()

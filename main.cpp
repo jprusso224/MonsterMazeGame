@@ -9,11 +9,14 @@
 
 #include "GameEntity/Player.h"
 #include "GameEntity/EntityLoader.h"
+#include "GameEventTimer.h"
 #include "MainWindow.h"
 #include "InputHandler.h"
 
 typedef SDL_Window* SDL_WindowPtr;
 typedef SDL_Renderer* SDL_RendererPtr;
+
+static const uint32_t FRAME_RATE_MS = 33; //MS per Frame
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +28,7 @@ int main(int argc, char *argv[])
 
     Mix_Music *music = nullptr;
     //Start up SDL and create window
+
 
     if( SDL_Init( SDL_INIT_EVERYTHING) < 0 )
     {
@@ -66,35 +70,49 @@ int main(int argc, char *argv[])
 
         Mix_PlayMusic(music,-1);
 
-        uint32_t startTime = SDL_GetTicks();
-        uint32_t newTime;
+        /*Initialize game loop timer at fixed frame rate*/
+        GameEventTimer gameUpdateTimer;
+        gameUpdateTimer.start(FRAME_RATE_MS);
+        uint32_t currentTime_ms = SDL_GetTicks();
+        uint32_t elapsedTime_ms = 0;
 
         /********* THIS IS THE MAIN GAME LOOP ********************/
         qDebug() << QString("Entering main loop! Good luck!");
 
         while (!done)
         {
-            //handle frame rate and cap at 30 fps
-            newTime = SDL_GetTicks();
-            while((newTime - startTime) < 33)
+            //compute elapsed time
+            elapsedTime_ms = SDL_GetTicks() - currentTime_ms;
+
+            //always update the game loop timer!
+            gameUpdateTimer.update(elapsedTime_ms);
+
+            //Allow game to continue if game loop timer expires
+            if(gameUpdateTimer.isExpired())
             {
-                newTime = SDL_GetTicks();
+                // message processing
+                ProcessInputType input = inputHandler->processInput();
+                if(input == ProcessInputType::CLOSE_EVENT)
+                {
+                    done = true;
+                    break;
+                }
+
+                /*
+                 * Pass input to game layers and objects.
+                 * TODO: Only pass input to objects that need it.
+                 */
+                mainWindow->processInput(input);
+
+                //pass elapsed time to game layers and objects
+                mainWindow->update(FRAME_RATE_MS);
+
+                //render the game
+                mainWindow->draw();
+
+                //restart the game loop timer
+                gameUpdateTimer.start(FRAME_RATE_MS);
             }
-
-            // message processing loop
-            ProcessInputType input = inputHandler->processInput();
-            if(input == ProcessInputType::CLOSE_EVENT)
-            {
-                done = true;
-                break;
-            }
-
-            mainWindow->processInput(input);
-
-            mainWindow->update(newTime);
-            mainWindow->draw();
-
-
         }
         /*********END MAIN LOOP***********************************/
 

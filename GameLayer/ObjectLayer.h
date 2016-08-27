@@ -13,7 +13,7 @@ class ObjectLayer : public GameLayer
 
         bool init() override;
         virtual void processInput(ProcessInputType input);
-        void update(uint32_t currTime_ms) override;
+        void update(uint32_t elapsedTime_ms) override;
         void draw() override;
 
     protected:

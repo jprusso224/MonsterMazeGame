@@ -9,7 +9,7 @@ public:
     Projectile(Renderer_Ptr renderer, GamePosition pos, GameVelocity vel);
 
     virtual void init();
-    virtual void update(uint32_t currTime_ms);
+    virtual void update(uint32_t elapsedTime_ms);
     virtual void render();
 
 

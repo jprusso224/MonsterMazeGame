@@ -20,7 +20,7 @@ bool HUD::init()
     return success;
 }
 
-void HUD::update(uint32_t currTime_ms)
+void HUD::update(uint32_t elapsedTime_ms)
 {
     //Handle business logic
 }

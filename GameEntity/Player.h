@@ -13,12 +13,13 @@ public:
 
     virtual void init();
     virtual void processInput(ProcessInputType input);
-    virtual void update(uint32_t currTime_ms);
+    virtual void update(uint32_t elapsedTime_ms);
     virtual void render();
     virtual void attack();
 
 private:
 
+    ProcessInputType lastInput;
 };
 
 #endif // PLAYER_H

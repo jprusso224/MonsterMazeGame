@@ -11,7 +11,7 @@ public:
     GameObject(Renderer_Ptr renderer);
 
     virtual void init() = 0;
-    virtual void update(uint32_t currTime_ms) = 0;
+    virtual void update(uint32_t elapsedTime_ms) = 0;
     virtual void render() = 0;
 
     GamePosition getPosition() const {return m_position;}

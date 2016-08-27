@@ -5,6 +5,7 @@
 
 #include "GameEntity.h"
 #include "Player.h"
+#include "GameEventTimer.h"
 
 enum RandomMonsterEvent : int
 {
@@ -21,11 +22,11 @@ class Monster : public GameEntity
 
 public:
     Monster(Renderer_Ptr renderer);
-    virtual ~Monster(){}
+    virtual ~Monster();
 
     virtual void init();
     virtual void processInput(ProcessInputType input){Q_UNUSED(input)} /*Monsters don't care about input*/
-    virtual void update(uint32_t currTime_ms  ) override;
+    virtual void update(uint32_t elapsedTime_ms ) override;
     virtual void render();
 
     virtual void attack();
@@ -39,9 +40,11 @@ private:
 
     int m_fireRate;
 
+    /*timed events*/
+    GameEventTimer* m_movementTimer;
+    GameEventTimer* m_attackTimer;
+
     void handleEventTimeout();
-    uint32_t lastEventTime_ms;
-    uint32_t lastFireTime_ms;
 
     /*Must have const reference to player, can never change player*/
     const Player* m_player;

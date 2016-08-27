@@ -45,7 +45,7 @@ void ObjectLayer::processInput(ProcessInputType input)
     m_player->processInput(input);
 }
 
-void ObjectLayer::update(uint32_t currTime_ms)
+void ObjectLayer::update(uint32_t elapsedTime_ms)
 {
 
     for(Monster* monster : m_monsterMap)
@@ -56,10 +56,10 @@ void ObjectLayer::update(uint32_t currTime_ms)
          */
         monster->setPlayer(m_player);
 
-        monster->update(currTime_ms);
+        monster->update(elapsedTime_ms);
     }
 
-    m_player->update(currTime_ms);
+    m_player->update(elapsedTime_ms);
 
     checkProjectileHits();
 

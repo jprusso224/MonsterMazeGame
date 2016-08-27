@@ -51,7 +51,8 @@ HEADERS += \
     GameConstants.h \
     GameEntity/GameEntityFactory.h \
     GameObject.h \
-    GameEntity/Projectile.h
+    GameEntity/Projectile.h \
+    GameEventTimer.h
 
 DISTFILES += \
     MazeMap \

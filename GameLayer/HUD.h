@@ -10,7 +10,7 @@ class HUD : public GameLayer
         virtual ~HUD();
 
         bool init() override;
-        void update(uint32_t currTime_ms) override;
+        void update(uint32_t elapsedTime_ms) override;
         void draw() override;
 
     protected:

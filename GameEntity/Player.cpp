@@ -69,7 +69,7 @@ void Player::processInput(ProcessInputType input)
     }
 }
 
-void Player::update(uint32_t currTime_ms)
+void Player::update(uint32_t elapsedTime_ms)
 {
 
     m_position.x += m_velocity.dx;
@@ -77,7 +77,7 @@ void Player::update(uint32_t currTime_ms)
 
     checkScreenBoundaries();
 
-    updateProjectiles(currTime_ms);
+    updateProjectiles(elapsedTime_ms);
 
 }
 

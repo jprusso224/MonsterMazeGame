@@ -48,9 +48,12 @@ void GameEntity::removeProjectiles(QList<int> projectileIdxToRemove)
     //Remove AND delete projectiles when they are no longer in use.
     for(int idx : projectileIdxToRemove)
     {
-        Projectile* pRemove = projectileList.at(idx);
-        projectileList.removeAt(idx);
-        delete pRemove;
+        if(idx < projectileList.size())
+        {
+            Projectile* pRemove = projectileList.at(idx); //BUG HERE
+            projectileList.removeAt(idx);
+            delete pRemove;
+        }
     }
 }
 
