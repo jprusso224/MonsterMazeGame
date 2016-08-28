@@ -107,16 +107,23 @@ void Monster::attack()
     GamePosition unscaledTargetVector = playerPos - m_position;
 
     double norm = hypot((double)unscaledTargetVector.x,(double)unscaledTargetVector.y);
-    GameVelocity targetVector;
-    targetVector.dx = ((double)unscaledTargetVector.x / norm)*7.0;
-    targetVector.dy = ((double)unscaledTargetVector.y / norm)*7.0;
 
-    Projectile *p = new Projectile(m_renderer,m_position,targetVector);
-    p->init();
-    projectileList.append(p);
+    //Only attack if in range.
+    if((int)norm <= m_attackRange)
+    {
 
-    /*restart attack timer*/
-    m_attackTimer->start(m_fireRate*1000);
+        GameVelocity targetVector;
+        targetVector.dx = ((double)unscaledTargetVector.x / norm)*7.0;
+        targetVector.dy = ((double)unscaledTargetVector.y / norm)*7.0;
+
+        Projectile *p = new Projectile(m_renderer,m_position,targetVector);
+        p->init();
+        projectileList.append(p);
+
+        /*restart attack timer*/
+        m_attackTimer->start(m_fireRate*1000);
+
+    }
 }
 
 void Monster::handleEventTimeout()

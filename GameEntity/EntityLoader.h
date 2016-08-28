@@ -31,6 +31,7 @@ struct EntityData
 
     //OPTIONAL FIELDS
     int firerate;
+    int attackRange;
 
     //TBD.
 

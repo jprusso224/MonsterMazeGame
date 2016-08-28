@@ -54,6 +54,7 @@ void GameEntityFactory::createNewMonster(EntityData* data)
     setCommonEntityData(monster, data);
 
     monster->setFireRate(data->firerate);
+    monster->setAttackRange(data->attackRange);
 
     //insert monster and increment unique monster ID
     m_monsterMap.insert(m_monster_UID, monster);

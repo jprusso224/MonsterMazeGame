@@ -36,9 +36,13 @@ public:
     int getFireRate() const {return m_fireRate;}
     void setFireRate(int fireRate){m_fireRate = fireRate;}
 
+    int getAttackRange() const {return m_attackRange;}
+    void setAttackRange(int attackRange){m_attackRange = attackRange;}
+
 private:
 
     int m_fireRate;
+    int m_attackRange;
 
     /*timed events*/
     GameEventTimer* m_movementTimer;
