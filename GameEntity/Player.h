@@ -20,6 +20,7 @@ public:
 private:
 
     ProcessInputType lastInput;
+
 };
 
 #endif // PLAYER_H

@@ -6,6 +6,7 @@ static const QString ENTITY_NAME = QString("name");
 static const QString ENTITY_TYPE = QString("type");
 
 static const QString ENTITY_IMG = QString("img");
+static const QString ENTITY_HIT_IMG = QString("hit-img");
 static const QString ENTITY_IMG_NAME = QString("name");
 static const QString ENTITY_IMG_SIZE = QString("size");
 
@@ -92,6 +93,25 @@ bool EntityLoader::loadEntities()
                         qDebug() << ENTITY_IMG_SIZE << ": " << attr.value().toString();
                         workingEntity->imgSize = attr.value().toInt();
                     }
+                    else
+                    {
+                        qDebug() << "Unknown attribute name.";
+                    }
+                }
+            }
+
+            else if(xmlReader->name().compare(ENTITY_HIT_IMG) == 0)
+            {
+                qDebug() << "start entity hit image!";
+                QXmlStreamAttributes attrs = xmlReader->attributes();
+                for(QXmlStreamAttribute attr : attrs)
+                {
+                    if(attr.name().compare(ENTITY_IMG_NAME) == 0)
+                    {
+                        qDebug() << ENTITY_IMG_NAME << ": " << attr.value().toString();
+                        workingEntity->imgHitName = attr.value().toString();
+                    }
+                    //Ignoring hit img size for now!
                     else
                     {
                         qDebug() << "Unknown attribute name.";

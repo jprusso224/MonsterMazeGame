@@ -67,6 +67,7 @@ void GameEntityFactory::setCommonEntityData(GameEntity* entity ,EntityData* data
     entity->setDamage(data->damage);
     entity->setImageName(data->imgName);
     entity->setImageSize(data->imgSize);
+    entity->setHitImgName(data->imgHitName);
 }
 
 

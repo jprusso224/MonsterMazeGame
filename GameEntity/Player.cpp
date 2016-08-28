@@ -11,7 +11,15 @@ void Player::init()
     {
         qDebug() << "loaded player image!";
     }
+    if(loadHitImage())
+    {
+        qDebug() << "loaded player hit image!";
+    }
+
     m_orientation = GameDirection::DOWN;
+
+    hitAnimation->appendImg(m_hitImg,250);
+    hitAnimation->appendImg(m_img,250);
 }
 
 void Player::processInput(ProcessInputType input)
@@ -79,10 +87,13 @@ void Player::update(uint32_t elapsedTime_ms)
 
     updateProjectiles(elapsedTime_ms);
 
+    updateHitState(elapsedTime_ms);
+
 }
 
 void Player::render()
 {
+
     SDL_Rect rDest = {m_position.x,m_position.y,0,0};
     SDL_QueryTexture(m_img, NULL, NULL, &rDest.w, &rDest.h);
     SDL_RenderCopy(m_renderer, m_img, NULL, &rDest);

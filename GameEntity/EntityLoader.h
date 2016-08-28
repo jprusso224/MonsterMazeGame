@@ -23,6 +23,8 @@ struct EntityData
     QString imgName;
     int imgSize;
 
+    QString imgHitName;
+
     double health;
     double speed;
     double damage;

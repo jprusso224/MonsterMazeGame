@@ -3,6 +3,7 @@
 	<!-- The Hero -->
 	<entity type="Player" name="Hero">
 		<img name="Hero.png" size="32"/>
+                <hit-img name="HeroHit.png" size="32"/>
 		<health val="100"/> <!-- HP -->
 		<speed val="3"/> <!-- 1-5 -->
 		<damage val="20"/> <!-- HP -->
@@ -12,6 +13,7 @@
 	<!-- The Medic -->
 	<entity type="Monster" name="Red">
                 <img name="RedMonster.png" size="32"/>
+                <hit-img name="RedMonsterHit.png" size="32"/>
                 <health val="400"/> <!-- HP -->
                 <speed val="4"/> <!-- 1-5 -->
                 <damage val="10"/> <!-- HP -->
@@ -24,6 +26,7 @@
 	<!-- The Overseer -->
 	<entity type="Monster" name="Yellow">
                 <img name="YellowMonster.png" size="32"/>
+                <hit-img name="YellowMonsterHit.png" size="32"/>
                 <health val="300"/> <!-- HP -->
                 <speed val="3"/>
                 <damage val="5"/> <!-- HP -->
@@ -36,6 +39,7 @@
 	<!-- The Assasin -->
 	<entity type="Monster" name="Green">
                 <img name="GreenMonster.png" size="32"/>
+                <hit-img name="GreenMonsterHit.png" size="32"/>
                 <health val="200"/> <!-- HP -->
                 <speed val="5"/>
                 <damage val="25"/> <!-- HP -->
@@ -48,6 +52,7 @@
 	<!-- The Tank -->
 	<entity type="Monster" name="Blue">
                 <img name="BlueMonster.png" size="32"/>
+                <hit-img name="BlueMonsterHit.png" size="32"/>
                 <health val="500"/> <!-- HP -->
                 <speed val="1"/>
                 <damage val="5"/> <!-- HP -->

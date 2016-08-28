@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 
                 /*
                  * Pass input to game layers and objects.
-                 * TODO: Only pass input to objects that need it.
+                 * TODO: Only pass input to objects that need it. Input Observer?
                  */
                 mainWindow->processInput(input);
 

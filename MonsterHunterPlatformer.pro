@@ -35,7 +35,8 @@ SOURCES += main.cpp \
     MainWindow.cpp \
     GameEntity/GameEntityFactory.cpp \
     GameObject.cpp \
-    GameEntity/Projectile.cpp
+    GameEntity/Projectile.cpp \
+    GameAnimation.cpp
 
 HEADERS += \
     GameEntity/GameEntity.h \
@@ -52,7 +53,8 @@ HEADERS += \
     GameEntity/GameEntityFactory.h \
     GameObject.h \
     GameEntity/Projectile.h \
-    GameEventTimer.h
+    GameEventTimer.h \
+    GameAnimation.h
 
 DISTFILES += \
     MazeMap \
