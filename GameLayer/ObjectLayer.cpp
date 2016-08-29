@@ -48,6 +48,8 @@ void ObjectLayer::processInput(ProcessInputType input)
 void ObjectLayer::update(uint32_t elapsedTime_ms)
 {
 
+    QList<int> deathMarks;
+
     for(Monster* monster : m_monsterMap)
     {
         /*
@@ -57,6 +59,18 @@ void ObjectLayer::update(uint32_t elapsedTime_ms)
         monster->setPlayer(m_player);
 
         monster->update(elapsedTime_ms);
+
+        if(monster->getHealthState() == EntityHealthState::DEAD)
+        {
+            //mark for death
+            deathMarks.append(m_monsterMap.key(monster));
+        }
+    }
+
+    //Kill monsters marked for death.
+    for(int mark : deathMarks)
+    {
+        m_monsterMap.remove(mark);
     }
 
     m_player->update(elapsedTime_ms);

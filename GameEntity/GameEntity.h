@@ -9,6 +9,13 @@
 #include "Projectile.h"
 #include "GameAnimation.h"
 
+
+enum class EntityHealthState
+{
+    DEAD,
+    ALIVE
+};
+
 enum class EntityHitState
 {
     NOT_HIT,
@@ -46,6 +53,8 @@ public:
     void processHit(int damage);
     void updateHitState(uint32_t elapsedTime_ms);
 
+    EntityHealthState getHealthState() const {return healthState;}
+
 
 protected:
 
@@ -71,6 +80,7 @@ protected:
     /* Hit member variables*/
     GameAnimation* hitAnimation;
     EntityHitState hitState;
+    EntityHealthState healthState;
 
 
 };

@@ -4,7 +4,8 @@
 GameEntity::GameEntity(Renderer_Ptr renderer)
     : GameObject(renderer),
       hitAnimation(new GameAnimation()),
-      hitState(EntityHitState::NOT_HIT)
+      hitState(EntityHitState::NOT_HIT),
+      healthState(EntityHealthState::ALIVE)
 
 {
 }
@@ -32,6 +33,7 @@ void GameEntity::processHit(int damage)
     if(m_health < 0)
     {
         qDebug() << m_name << " was killed!";
+        healthState = EntityHealthState::DEAD;
     }
 
     if(hitAnimation->start() != AnimationState::STARTED)
